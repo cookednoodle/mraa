@@ -36,7 +36,7 @@ try:
     x.isr(mraa.EDGE_BOTH, isr_routine, x)
 
     # wait until ENTER is pressed
-    var = raw_input("Press ENTER to stop")
+    input("Press ENTER to stop")
     x.isrExit()
 except ValueError as e:
     print(e)
