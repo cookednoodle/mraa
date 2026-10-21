@@ -144,10 +144,21 @@ class Spi;
 
 %include ../mraa.i
 
-%init %{
+%{
+    // Declared at file scope: newer SWIG (4.4+) emits %init code inside a
+    // function, where these would become function-local declarations
+#ifdef __cplusplus
+extern "C" {
+#endif
     #include "python/mraapy.h"
     #include "mraa_lang_func.h"
     extern mraa_lang_func_t* lang_func;
+#ifdef __cplusplus
+}
+#endif
+%}
+
+%init %{
     // Initialise python threads, this allows use to grab the GIL when we are
     // required to do so
     Py_InitializeEx(0);

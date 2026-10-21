@@ -100,7 +100,7 @@ if(NOT ${found})
       endif()
     endif()
 
-    execute_process(COMMAND ${_executable} -c "from distutils.sysconfig import *; print(get_python_lib())"
+    execute_process(COMMAND ${_executable} -c "import sysconfig; print(sysconfig.get_path('purelib'))"
                     RESULT_VARIABLE _cvpy_process
                     OUTPUT_VARIABLE _std_packages_path
                     OUTPUT_STRIP_TRAILING_WHITESPACE)
